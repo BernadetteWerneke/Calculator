@@ -32,6 +32,7 @@
         android:layout_height="70dp"
         android:autoSizeMaxTextSize="50sp"
         android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
         android:background="@color/background_color"
         android:gravity="center|end"
