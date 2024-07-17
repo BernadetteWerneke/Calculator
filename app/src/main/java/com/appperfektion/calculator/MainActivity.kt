@@ -1,10 +1,15 @@
 package com.appperfektion.calculator
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.text.DecimalFormat
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.appperfektion.calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     var dotControl: Boolean = true
     var buttonEqualContorl: Boolean = false
+
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -278,4 +285,29 @@ class MainActivity : AppCompatActivity() {
             mainBinding.textViewResult.text = myFormatter.format(firstNumber)
         }
     }
+
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.settings_menu,menu)
+        return true
+    }*/
+
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings_item){
+            val intent = Intent(this, ChangeThemeActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
+    }*/
+
+    /*override fun onResume() {
+        super.onResume()
+
+        sharedPreferences = this.getSharedPreferences("DarkTheme", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPreferences.getBoolean("switch", false)
+        if (isDarkMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }*/
 }
