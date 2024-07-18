@@ -284,14 +284,25 @@ class MainActivity : AppCompatActivity() {
             firstNumber /= lastNumber
             mainBinding.textViewResult.text = myFormatter.format(firstNumber)
         }
+
+        //Save Light or Dark mode if app open again
+        sharedPreferences = this.getSharedPreferences("DarkTheme", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPreferences.getBoolean("switch", false)
+        if (isDarkMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.settings_menu,menu)
         return true
-    }*/
+    }
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.settings_item){
             val intent = Intent(this, ChangeThemeActivity::class.java)
             startActivity(intent)
@@ -299,7 +310,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }*/
 
-    /*override fun onResume() {
+   override fun onResume() {
         super.onResume()
 
         sharedPreferences = this.getSharedPreferences("DarkTheme", Context.MODE_PRIVATE)
@@ -309,5 +320,54 @@ class MainActivity : AppCompatActivity() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-    }*/
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        sharedPreferences = this.getSharedPreferences("calculations", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        val resultToSave = mainBinding.textViewResult.text.toString()
+        val historyToSave = mainBinding.textViewHistory.text.toString()
+        val numberToSave = number
+        val statusToSave = status
+        val operatorToSave = operator
+        val dotToSave = dotControl
+        val equalToSave = buttonEqualContorl
+        val firstNumberToSave = firstNumber.toString()
+        val lastNumberToSave = lastNumber.toString()
+
+        editor.putString("result", resultToSave)
+        editor.putString("history", historyToSave)
+        editor.putString("number", numberToSave)
+        editor.putString("status", statusToSave)
+        editor.putBoolean("operator", operatorToSave)
+        editor.putBoolean("dot", dotToSave)
+        editor.putBoolean("equal", equalToSave)
+        editor.putString("first", firstNumberToSave)
+        editor.putString("last", lastNumberToSave)
+
+        editor.apply()
+
+        Toast.makeText(this, "All data saved.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        sharedPreferences = this.getSharedPreferences("calculations", Context.MODE_PRIVATE)
+
+        mainBinding.textViewResult.text = sharedPreferences.getString("result", "0")
+        mainBinding.textViewHistory.text = sharedPreferences.getString("history", "")
+
+        number = sharedPreferences.getString("number", null)
+        status = sharedPreferences.getString("status", null)
+        operator = sharedPreferences.getBoolean("operator", false)
+        dotControl = sharedPreferences.getBoolean("dot", true)
+        buttonEqualContorl = sharedPreferences.getBoolean("equal", false)
+        firstNumber = sharedPreferences.getString("first", "0.0")!!.toDouble()
+        lastNumber = sharedPreferences.getString("last", "0.0")!!.toDouble()
+
+    }
 }

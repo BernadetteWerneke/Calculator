@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.appperfektion.calculator.databinding.ActivityChangeThemeBinding
-import java.util.prefs.AbstractPreferences
 
 class ChangeThemeActivity : AppCompatActivity() {
 
@@ -24,7 +23,7 @@ class ChangeThemeActivity : AppCompatActivity() {
         }
 
         switchBinding.mySwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            sharedPreferences = this.getSharedPreferences("Dark Theme", Context.MODE_PRIVATE)
+            sharedPreferences = this.getSharedPreferences("DarkTheme", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
 
             if (isChecked){
@@ -41,8 +40,9 @@ class ChangeThemeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        sharedPreferences = this.getSharedPreferences("Dark Theme", Context.MODE_PRIVATE)
+        sharedPreferences = this.getSharedPreferences("DarkTheme", Context.MODE_PRIVATE)
         val isDark = sharedPreferences.getBoolean("switch", false)
         switchBinding.mySwitch.isChecked = isDark
     }
+
 }
