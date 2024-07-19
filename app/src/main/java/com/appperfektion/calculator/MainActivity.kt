@@ -350,7 +350,7 @@ class MainActivity : AppCompatActivity() {
 
         editor.apply()
 
-        Toast.makeText(this, "All data saved.", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "All data saved.", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {

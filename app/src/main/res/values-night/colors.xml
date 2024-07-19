@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="bar_color">#FF3700B3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bar_color">#FF000000</color>
     <color name="background_color">#FF000000</color>
-    <color name="text_color">#FFFFFFFF</color>
-    <color name="orange">#E91E63</color>
+    <color name="text_color">#93FB19</color>
+    <color name="orange">#F214A1</color>
     <color name="switch_thumb">#E91E63</color>
-    <color name="switch_track">#FAAE97</color>
+    <color name="switch_track">#8BC34A</color>
 </resources>
+
+    <!-- #06ECF4 -->
