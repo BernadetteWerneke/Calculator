@@ -5,8 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.icu.text.DecimalFormat
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,28 +12,27 @@ import com.appperfektion.calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mainBinding: ActivityMainBinding
-    var number: String? = null
+     lateinit var mainBinding: ActivityMainBinding
+     var number: String? = null
 
-    var firstNumber: Double = 0.0
-    var lastNumber: Double = 0.0
+     var firstNumber: Double = 0.0
+     var lastNumber: Double = 0.0
 
-    var status: String? = null
-    var operator: Boolean = false
+     var status: String? = null
+     var operator: Boolean = false
 
-    val myFormatter = DecimalFormat("######.######")
+     val myFormatter = DecimalFormat("######.######")
 
-    var history: String = ""
-    var currentResult: String = ""
+     var history: String = ""
+     var currentResult: String = ""
 
-    var dotControl: Boolean = true
-    var buttonEqualContorl: Boolean = false
+     var dotControl: Boolean = true
+     var buttonEqualControl: Boolean = false
 
-    lateinit var sharedPreferences: SharedPreferences
+     lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mainBinding.root
         setContentView(view)
@@ -190,14 +187,14 @@ class MainActivity : AppCompatActivity() {
             }
             operator = false
             dotControl = true
-            buttonEqualContorl = true
+            buttonEqualControl = true
         }
 
         mainBinding.btnDot.setOnClickListener {
             if (dotControl) {
                 number = if (number == null){
                     "0."
-                } else if (buttonEqualContorl){
+                } else if (buttonEqualControl){
                     if (mainBinding.textViewResult.text.toString().contains(".")){
                         mainBinding.textViewResult.text.toString()
                     } else {
@@ -224,7 +221,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onButtonACClicked(){
+     fun onButtonACClicked(){
         number = null
         status = null
         mainBinding.textViewResult.text = "0"
@@ -232,13 +229,13 @@ class MainActivity : AppCompatActivity() {
         firstNumber = 0.0
         lastNumber = 0.0
         dotControl = true
-        buttonEqualContorl = false
+        buttonEqualControl = false
     }
 
-    fun onNumberClicked(clickedNumber: String){
+     fun onNumberClicked(clickedNumber: String){
         if (number == null){
             number = clickedNumber
-        } else if (buttonEqualContorl) {
+        } else if (buttonEqualControl) {
             number = if (dotControl) {
                 clickedNumber
             } else {
@@ -254,7 +251,7 @@ class MainActivity : AppCompatActivity() {
         }
         mainBinding.textViewResult.text = number
         operator = true
-        buttonEqualContorl = false
+        buttonEqualControl = false
     }
 
     fun plus(){
@@ -269,13 +266,13 @@ class MainActivity : AppCompatActivity() {
         mainBinding.textViewResult.text = myFormatter.format(firstNumber)
     }
 
-    fun multiply(){
+    private fun multiply(){
         lastNumber = mainBinding.textViewResult.text.toString().toDouble()
         firstNumber *= lastNumber
         mainBinding.textViewResult.text = myFormatter.format(firstNumber)
     }
 
-    fun divide() {
+     fun divide() {
         lastNumber = mainBinding.textViewResult.text.toString().toDouble()
         if (lastNumber == 0.0) {
             Toast.makeText(applicationContext, "The divisor cannot be zero.", Toast.LENGTH_LONG)
@@ -296,19 +293,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.settings_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings_item){
-            val intent = Intent(this, ChangeThemeActivity::class.java)
-            startActivity(intent)
-        }
-        return super.onOptionsItemSelected(item)
-    }*/
 
    override fun onResume() {
         super.onResume()
@@ -334,7 +318,7 @@ class MainActivity : AppCompatActivity() {
         val statusToSave = status
         val operatorToSave = operator
         val dotToSave = dotControl
-        val equalToSave = buttonEqualContorl
+        val equalToSave = buttonEqualControl
         val firstNumberToSave = firstNumber.toString()
         val lastNumberToSave = lastNumber.toString()
 
@@ -365,7 +349,7 @@ class MainActivity : AppCompatActivity() {
         status = sharedPreferences.getString("status", null)
         operator = sharedPreferences.getBoolean("operator", false)
         dotControl = sharedPreferences.getBoolean("dot", true)
-        buttonEqualContorl = sharedPreferences.getBoolean("equal", false)
+        buttonEqualControl = sharedPreferences.getBoolean("equal", false)
         firstNumber = sharedPreferences.getString("first", "0.0")!!.toDouble()
         lastNumber = sharedPreferences.getString("last", "0.0")!!.toDouble()
 
