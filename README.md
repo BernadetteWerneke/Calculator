@@ -13,5 +13,6 @@ landscape
 <img width="380" alt="3calc" src="https://github.com/user-attachments/assets/3a7a1188-801a-4c8d-8630-4fdc70456bc8">
 
 launcher
+<img width="76" alt="Bildschirmfoto 2024-07-20 um 13 13 42" src="https://github.com/user-attachments/assets/f6d2825d-65bf-4c1d-80a7-486904919f96">
 
 
